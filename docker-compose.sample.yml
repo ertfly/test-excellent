@@ -1,0 +1,41 @@
+version: '2'
+services:
+  db:
+    container_name: test.db
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: Test@3661
+    volumes:
+      - ./.db/:/var/lib/postgresql/data
+
+  web:
+    container_name: test.api
+    build: ./back
+    ports:
+      - '8000:80'
+    volumes:
+      - ./back:/app
+    env_file:
+      - ./back/.env
+    dns: 
+      - '8.8.8.8'
+      - '8.8.4.4'
+    depends_on:
+      - db
+
+  front:
+    container_name: test.front
+    build: ./front
+    env_file: 
+      - ./front/.env
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./front:/app
+    dns: 
+      - '8.8.8.8'
+      - '8.8.4.4'
