@@ -25,7 +25,7 @@ class AuthPost extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|unique:users,email|max:250',
+            'email' => 'required|email|max:250',
             'pass' => 'required',
         ];
     }
