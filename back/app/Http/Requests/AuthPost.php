@@ -54,9 +54,8 @@ class AuthPost extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'nome',
-            'email' => 'e-mail',
-            'pass' => 'senha',
+            'email' => 'E-mail',
+            'pass' => 'Senha',
         ];
     }
 }
