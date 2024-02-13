@@ -45,4 +45,18 @@ class AuthPost extends FormRequest
                 'validations' => $validator->errors()->all()
             ]));
     }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array<string, string>
+     */
+    public function attributes(): array
+    {
+        return [
+            'name' => 'nome',
+            'email' => 'e-mail',
+            'pass' => 'senha',
+        ];
+    }
 }
