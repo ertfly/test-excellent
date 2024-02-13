@@ -4,3 +4,4 @@ composer.lock
 .env
 .env.example
 .phpunit.result.cache
+php_errors.log
