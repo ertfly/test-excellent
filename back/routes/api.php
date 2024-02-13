@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Api\AuthController;
 use App\Http\Api\PongController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('no-token')->get('/ping', [PongController::class, 'index']);
+Route::middleware('no-token')->post('/auth', [AuthController::class, 'create']);
 
 // Route::middleware('api-admin')->post('/token', [TokenController::class, 'create']);
 // Route::middleware('api-admin-token')->get('/auth', [AuthController::class, 'detail']);

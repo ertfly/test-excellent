@@ -9,9 +9,10 @@ let callLoginPost = (data, callback = () => { }) => (dispatch) => {
         if (!data)
             return;
 
-        ACTION_APP_SESSION.payload.logged = data.logged
+        console.log(data)
+        /* ACTION_APP_SESSION.payload.logged = data.logged
         ACTION_APP_SESSION.payload.name = data.name
-        dispatch(ACTION_APP_SESSION)
+        dispatch(ACTION_APP_SESSION) */
 
         callback()
     })

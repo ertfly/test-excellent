@@ -15,7 +15,7 @@ let Login = ({ methods: { callLoginPost } }) => {
             email: email,
             pass: pass
         }, () => {
-            window.navigate('/')
+            // window.navigate('/')
         })
     }
 

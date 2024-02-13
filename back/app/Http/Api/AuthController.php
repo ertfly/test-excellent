@@ -2,11 +2,13 @@
 
 namespace App\Http\Api;
 
-class TokenController
+use App\Http\Requests\AuthPost;
+use Exception;
+
+class AuthController
 {
-    public function create(){
-        return [
-            'token' => 'token-admin'
-        ];
+    public function create(AuthPost $request)
+    {
+        return $request->all();
     }
 }

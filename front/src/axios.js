@@ -22,7 +22,13 @@ const traitResponse = ({ data, response }) => {
   }
 
   if (response.code !== 0) {
-    toast.error(response.msg ?? null)
+    if (typeof (response.msg) == 'object') {
+      for(let i in response.msg) {
+        toast.error(response.msg[i])
+      }
+    } else {
+      toast.error(response.msg ?? 'Erro desconhecido')
+    }
   }
 
   switch (response.code) {
