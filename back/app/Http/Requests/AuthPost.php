@@ -25,7 +25,7 @@ class AuthPost extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|unique:users|max:250',
+            'email' => 'required|email|unique:users,email|max:250',
             'pass' => 'required',
         ];
     }
@@ -43,6 +43,6 @@ class AuthPost extends FormRequest
         throw new \Illuminate\Http\Exceptions\HttpResponseException(response()->json(
             [
                 'validations' => $validator->errors()->all()
-            ], \Illuminate\Http\JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
+            ]));
     }
 }
