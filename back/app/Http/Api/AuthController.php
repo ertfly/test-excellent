@@ -6,6 +6,8 @@ use App\Helpers\JWTHelpers;
 use App\Http\Requests\AuthPost;
 use App\Models\Users;
 use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class AuthController
 {
@@ -18,11 +20,30 @@ class AuthController
         }
 
         $jwt = new JWTHelpers(getenv('APP_KEY'));
+        $token = $jwt->encode([
+            'id' => $user->id,
+            'name' => $user->name,
+        ]);
+
+        setcookie('auth', $token, time() + 3600, '/', '', false, true);
+        return response()->json([]);
+    }
+
+    public function view(Request $request)
+    {
+        $jwt = new JWTHelpers(getenv('APP_KEY'));
+        $decoded = $jwt->decode($request->cookie('auth'));
+
+        $logged = false;
+        $name = '';
+        if($decoded['id']){
+            $logged = true;
+            $name = $decoded['name'];
+        }
+
         return [
-            'token' => $jwt->encode([
-                'id' => $user->id,
-                'name' => $user->name,
-            ]),
+            'logged' => $logged,
+            'name' => $name,
         ];
     }
 }

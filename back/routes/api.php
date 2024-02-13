@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('no-token')->get('/ping', [PongController::class, 'index']);
+Route::middleware('no-token')->get('/auth', [AuthController::class, 'view']);
 Route::middleware('no-token')->post('/auth', [AuthController::class, 'create']);
 
 // Route::middleware('api-admin')->post('/token', [TokenController::class, 'create']);
