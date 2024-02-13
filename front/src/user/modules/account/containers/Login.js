@@ -2,11 +2,10 @@ import { Link } from "react-router-dom"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import '../styles/Login.css'
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { callLoginPost } from "../actions/login"
-import { callAuthGet } from "../../../common/actions/app"
 
-let Login = ({ methods: { callLoginPost, callAuthGet } }) => {
+let Login = ({ methods: { callLoginPost } }) => {
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
     const [visible, setVisible] = useState(false)
@@ -17,7 +16,7 @@ let Login = ({ methods: { callLoginPost, callAuthGet } }) => {
             email: email,
             pass: pass
         }, () => {
-            
+            window.navigate('/')
         })
     }
 
@@ -28,10 +27,6 @@ let Login = ({ methods: { callLoginPost, callAuthGet } }) => {
             setVisible(true)
         }
     }
-
-    useEffect(() => {
-        callAuthGet();
-    },[callAuthGet]);
 
     return (
             <div className="container-login d-flex align-items-stretch">
@@ -77,7 +72,6 @@ const mapDispatchToProps = (dispatch) => ({
     methods: bindActionCreators(
         {
             callLoginPost,
-            callAuthGet,
         },
         dispatch
     )

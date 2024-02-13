@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import Loader from './../common/containers/Loader'
+import Loader from '../common/containers/Loader'
 import { useEffect, useState } from 'react';
 import { callTokenPost } from '../common/actions/app';
 import { callAuthGet } from './common/actions/app';
@@ -11,7 +11,7 @@ import routes from './routes';
 import Menu from './common/containers/Menu';
 
 
-let Middleware = ({ loader, header, children }) => {
+let MiddlewareLogged = ({ loader, header, children }) => {
     return (
         <>
             <Loader show={loader} />
@@ -45,4 +45,4 @@ const mapDispatchToProps = (dispatch) => ({
     )
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Middleware)
+export default connect(mapStateToProps, mapDispatchToProps)(MiddlewareLogged)

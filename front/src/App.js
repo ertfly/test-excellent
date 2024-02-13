@@ -1,11 +1,11 @@
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { Provider } from "react-redux";
 import store from "./user/store";
-import Middleware from "./user/middleware";
+import MiddlewareLogged from "./user/middleware-logged";
 import Login from './user/modules/account/containers/Login';
 import HeaderLogged from './user/common/containers/HeaderLogged';
 import Dashboard from './user/modules/dashboard/containers/Dashboard';
-import NoMiddleware from './user/no-middleware';
+import MiddlewareLogout from './user/middleware-logout';
 
 function App() {
   window.navigate = useNavigate()
@@ -14,17 +14,17 @@ function App() {
       {/* Routes Loggout */}
       <Route path="/account/login" exact element={
         <Provider store={store}>
-          <NoMiddleware>
+          <MiddlewareLogout>
             <Login />
-          </NoMiddleware>
+          </MiddlewareLogout>
         </Provider>} />
         
       {/* Routes Logged */}
       <Route path="/*" index element={
         <Provider store={store}>
-          <Middleware header={<HeaderLogged />}>
+          <MiddlewareLogged header={<HeaderLogged />}>
             <Dashboard />
-          </Middleware>
+          </MiddlewareLogged>
         </Provider>} />
     </Routes>
   );

@@ -31,19 +31,30 @@ class AuthController
 
     public function view(Request $request)
     {
-        $jwt = new JWTHelpers(getenv('APP_KEY'));
-        $decoded = $jwt->decode($request->cookie('auth'));
+
+        $auth = $request->cookie('auth');
 
         $logged = false;
         $name = '';
-        if($decoded['id']){
-            $logged = true;
-            $name = $decoded['name'];
+
+        if ($auth) {
+            $jwt = new JWTHelpers(getenv('APP_KEY'));
+            $decoded = $jwt->decode($auth);
+            if ($decoded['id']) {
+                $logged = true;
+                $name = $decoded['name'];
+            }
         }
 
         return [
             'logged' => $logged,
             'name' => $name,
         ];
+    }
+
+    public function delete()
+    {
+        setcookie('auth', null);
+        return [];
     }
 }

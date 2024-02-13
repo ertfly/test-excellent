@@ -1,7 +1,12 @@
+import { ACTION_APP_SESSION } from "../../user/common/actions/app"
 import { ACTION_APP_LOADER } from "../actions/app"
 
 let initialReducer = {
-    loader: false
+    loader: false,
+    session: {
+        logged: false,
+        name: '',
+    },
 }
 
 let AppReducer = (state = initialReducer, action) => {
@@ -10,6 +15,14 @@ let AppReducer = (state = initialReducer, action) => {
             return {
                 ...state,
                 loader: action.payload
+            }
+        case ACTION_APP_SESSION.type:
+            return {
+                ...state,
+                session: {
+                    logged: action.payload.logged,
+                    name: action.payload.name,
+                }
             }
         default:
             return state

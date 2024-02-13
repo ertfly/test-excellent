@@ -2,10 +2,20 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import Loader from './../common/containers/Loader'
+import Loader from '../common/containers/Loader'
+import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { callAuthGet } from './common/actions/app';
 
+let MiddlewareLogout = ({ loader, logged, methods: {callAuthGet}, children }) => {
 
-let NoMiddleware = ({ loader, children }) => {
+    useEffect(() => {
+        callAuthGet();
+    },[callAuthGet])
+
+    if(logged){
+        return <Navigate to={'/'} />
+    }
     return (
         <>
             <Loader show={loader} />
@@ -18,15 +28,17 @@ let NoMiddleware = ({ loader, children }) => {
 }
 
 const mapStateToProps = ({ app }) => ({
-    loader: app.loader
+    loader: app.loader,
+    logged: app.session.logged 
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    configMethods: bindActionCreators(
+    methods: bindActionCreators(
         {
+            callAuthGet
         },
         dispatch
     )
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(NoMiddleware)
+export default connect(mapStateToProps, mapDispatchToProps)(MiddlewareLogout)
