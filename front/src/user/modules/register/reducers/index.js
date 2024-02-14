@@ -10,7 +10,6 @@ let initialReducer = {
         },
         view: {
             name: '',
-            email: '',
         },
     },
     users: {
@@ -70,7 +69,6 @@ let RegisterReducers = (state = initialReducer, action) => {
                     ...state.customers,
                     view: {
                         name: action.payload.name,
-                        email: action.payload.email,
                     },
                 },
             };

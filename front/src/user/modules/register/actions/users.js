@@ -21,7 +21,7 @@ let ACTION_USER_VIEW = {
 
 let callUserListGet = (filter = {}, pg = 1) => (dispatch) => {
     dispatch(callLoader(true))
-    Api.get('/users?pg=' + pg).then((data) => {
+    Api.get('/users?page=' + pg).then((data) => {
         dispatch(callLoader(false))
         if (!data)
             return

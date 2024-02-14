@@ -7,7 +7,6 @@ use App\Http\Requests\AuthPost;
 use App\Models\Users;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 
 class AuthController
 {

@@ -14,41 +14,39 @@ let ACTION_CUSTOMER_LIST = {
 let ACTION_CUSTOMER_VIEW = {
     type: 'CUSTOMER_VIEW',
     payload: {
-        fullname: '',
-        email: '',
+        name: '',
     },
 };
 
 let callCustomerListGet = (filter = {}, pg = 1) => (dispatch) => {
     dispatch(callLoader(true))
-    Api.get('/customer?pg=' + pg).then((data) => {
+    Api.get('/customers?page=' + pg).then((data) => {
         dispatch(callLoader(false))
         if (!data)
             return
 
-        ACTION_CUSTOMER_LIST.payload.rows = data.rows
+        ACTION_CUSTOMER_LIST.payload.rows = data.data
         ACTION_CUSTOMER_LIST.payload.total = data.total
-        ACTION_CUSTOMER_LIST.payload.pagination = data.pagination
+        ACTION_CUSTOMER_LIST.payload.pagination = []
         dispatch(ACTION_CUSTOMER_LIST)
     })
 }
 
 let callCustomerViewGet = (id) => (dispatch) => {
     dispatch(callLoader(true))
-    Api.get('/customer/' + id).then((data) => {
+    Api.get('/customers/' + id).then((data) => {
         dispatch(callLoader(false))
         if (!data)
             return
 
-        ACTION_CUSTOMER_VIEW.payload.fullname = data.fullname
-        ACTION_CUSTOMER_VIEW.payload.email = data.email
+        ACTION_CUSTOMER_VIEW.payload.name = data.name
         dispatch(ACTION_CUSTOMER_VIEW)
     })
 }
 
 let callCustomerPost = (data, success = () => { }) => (dispatch) => {
     dispatch(callLoader(true))
-    Api.post('/customer?urldecode=1', data).then((data) => {
+    Api.post('/customers?urldecode=1', data).then((data) => {
         dispatch(callLoader(false))
         if (!data)
             return
@@ -60,7 +58,7 @@ let callCustomerPost = (data, success = () => { }) => (dispatch) => {
 
 let callCustomerPut = (id, data, success = () => { }) => (dispatch) => {
     dispatch(callLoader(true))
-    Api.put('/customer/' + id + '?urldecode=1', data).then((data) => {
+    Api.put('/customers/' + id + '?urldecode=1', data).then((data) => {
         dispatch(callLoader(false))
         if (!data)
             return
@@ -71,14 +69,13 @@ let callCustomerPut = (id, data, success = () => { }) => (dispatch) => {
 }
 
 let callCustomerClearView = () => (dispatch) => {
-    ACTION_CUSTOMER_VIEW.payload.fullname = ''
-    ACTION_CUSTOMER_VIEW.payload.email = ''
+    ACTION_CUSTOMER_VIEW.payload.name = ''
     dispatch(ACTION_CUSTOMER_VIEW)
 }
 
 let callCustomerDelete = (id, success = () => { }) => (dispatch) => {
     dispatch(callLoader(true))
-    Api.delete('/customer/' + id).then((data) => {
+    Api.delete('/customers/' + id).then((data) => {
         dispatch(callLoader(false))
         if (!data)
             return

@@ -28,19 +28,13 @@ let CustomerList = ({ setPageAttr, list, methods: { callCustomerListGet, callCus
     const headers = [
         {
             type: 'info',
-            name: 'fullname',
+            name: 'name',
             align: 'left',
             label: 'Nome Completo'
         },
         {
-            type: 'info',
-            name: 'email',
-            align: 'left',
-            label: 'E-mail'
-        },
-        {
-            type: 'info',
-            name: 'createdAt',
+            type: 'datetime',
+            name: 'created_at',
             align: 'right',
             label: 'Cadastro'
         },

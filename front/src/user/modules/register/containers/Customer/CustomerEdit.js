@@ -7,8 +7,7 @@ import { callCustomerViewGet, callCustomerPost, callCustomerPut } from "../../ac
 let CustomerEdit = ({ setPageAttr, methods: { callCustomerPost, callCustomerViewGet, callCustomerPut }, view }) => {
     const params = useParams()
     const [id] = useState(!params.id ? '' : params.id)
-    const [fullname, setFullname] = useState('')
-    const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
 
     useEffect(() => {
         let tabs
@@ -50,13 +49,11 @@ let CustomerEdit = ({ setPageAttr, methods: { callCustomerPost, callCustomerView
     }, [setPageAttr, id, callCustomerViewGet])
 
     useEffect(() => {
-        setFullname(view.fullname)
-        setEmail(view.email)
+        setName(view.name)
     }, [view])
 
     const finishedSubmit = () => {
-        setFullname('')
-        setEmail('')
+        setName('')
         window.navigate('/customers')
     }
 
@@ -64,8 +61,7 @@ let CustomerEdit = ({ setPageAttr, methods: { callCustomerPost, callCustomerView
         e.preventDefault()
 
         let data = {
-            fullname: encodeURI(fullname),
-            email: email,
+            name: encodeURI(name),
         }
 
         if (!id) {
@@ -82,11 +78,7 @@ let CustomerEdit = ({ setPageAttr, methods: { callCustomerPost, callCustomerView
                     <div className="form-row">
                         <div className="col-md-6 form-group">
                             <label className="required">Nome Completo:</label>
-                            <input type="text" className="form-control" value={fullname} onChange={e => setFullname(e.target.value)} />
-                        </div>
-                        <div className="col-md-6 form-group">
-                            <label className="required">E-mail:</label>
-                            <input type="email" className="form-control" value={email} onChange={e => setEmail(e.target.value)} />
+                            <input type="text" className="form-control" value={name} onChange={e => setName(e.target.value)} />
                         </div>
                     </div>
                 </div>
