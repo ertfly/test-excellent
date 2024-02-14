@@ -40,7 +40,7 @@ class AuthController
         if ($auth) {
             $jwt = new JWTHelpers(getenv('APP_KEY'));
             $decoded = $jwt->decode($auth);
-            if ($decoded['id']) {
+            if (($decoded['id'] ?? null)) {
                 $logged = true;
                 $name = $decoded['name'];
             }

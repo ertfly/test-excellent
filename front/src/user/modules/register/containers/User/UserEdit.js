@@ -7,7 +7,7 @@ import { callUserViewGet, callUserPost, callUserPut } from "../../actions/users"
 let UserEdit = ({ setPageAttr, methods: { callUserPost, callUserViewGet, callUserPut }, view }) => {
     const params = useParams()
     const [id] = useState(!params.id ? '' : params.id)
-    const [fullname, setFullname] = useState('')
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
     const [passConfirm, setPassConfirm] = useState('')
@@ -52,12 +52,12 @@ let UserEdit = ({ setPageAttr, methods: { callUserPost, callUserViewGet, callUse
     }, [setPageAttr, id, callUserViewGet])
 
     useEffect(() => {
-        setFullname(view.fullname)
+        setName(view.name)
         setEmail(view.email)
     }, [view])
 
     const finishedSubmit = () => {
-        setFullname('')
+        setName('')
         setEmail('')
         setPass('')
         setPassConfirm('')
@@ -68,7 +68,7 @@ let UserEdit = ({ setPageAttr, methods: { callUserPost, callUserViewGet, callUse
         e.preventDefault()
 
         let data = {
-            fullname: encodeURI(fullname),
+            name: encodeURI(name),
             email: encodeURI(email),
             pass: encodeURI(pass),
             passConfirm: encodeURI(passConfirm)
@@ -88,7 +88,7 @@ let UserEdit = ({ setPageAttr, methods: { callUserPost, callUserViewGet, callUse
                     <div className="form-row">
                         <div className="col-md-6 form-group">
                             <label className="required">Nome Completo:</label>
-                            <input type="text" className="form-control" value={fullname} onChange={e => setFullname(e.target.value)} />
+                            <input type="text" className="form-control" value={name} onChange={e => setName(e.target.value)} />
                         </div>
                         <div className="col-md-6 form-group">
                             <label className="required">E-mail:</label>

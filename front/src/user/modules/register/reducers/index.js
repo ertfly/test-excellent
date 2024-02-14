@@ -9,7 +9,7 @@ let initialReducer = {
             pagination: [],
         },
         view: {
-            fullname: '',
+            name: '',
             email: '',
         },
     },
@@ -20,7 +20,7 @@ let initialReducer = {
             pagination: [],
         },
         view: {
-            fullname: '',
+            name: '',
             email: '',
         },
     },
@@ -46,7 +46,7 @@ let RegisterReducers = (state = initialReducer, action) => {
                 users: {
                     ...state.users,
                     view: {
-                        fullname: action.payload.fullname,
+                        name: action.payload.name,
                         email: action.payload.email,
                     },
                 },
@@ -69,7 +69,7 @@ let RegisterReducers = (state = initialReducer, action) => {
                 customers: {
                     ...state.customers,
                     view: {
-                        fullname: action.payload.fullname,
+                        name: action.payload.name,
                         email: action.payload.email,
                     },
                 },

@@ -28,7 +28,7 @@ let UserList = ({ setPageAttr, list, methods: { callUserListGet, callUserDelete,
     const headers = [
         {
             type: 'info',
-            name: 'fullname',
+            name: 'name',
             align: 'left',
             label: 'Nome Completo'
         },
@@ -39,8 +39,8 @@ let UserList = ({ setPageAttr, list, methods: { callUserListGet, callUserDelete,
             label: 'E-mail'
         },
         {
-            type: 'info',
-            name: 'createdAt',
+            type: 'datetime',
+            name: 'created_at',
             align: 'right',
             label: 'Cadastro'
         },

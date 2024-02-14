@@ -5,8 +5,9 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 
-class AuthPost extends FormRequest
+class UserPut extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -23,8 +24,8 @@ class AuthPost extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => 'required|max:250',
             'email' => 'required|email|max:250',
-            'pass' => 'required',
         ];
     }
 
@@ -41,7 +42,8 @@ class AuthPost extends FormRequest
         throw new \Illuminate\Http\Exceptions\HttpResponseException(response()->json(
             [
                 'validations' => $validator->errors()->all()
-            ]));
+            ]
+        ));
     }
 
     /**
@@ -52,8 +54,8 @@ class AuthPost extends FormRequest
     public function attributes(): array
     {
         return [
+            'name' => 'Nome Completo',
             'email' => 'E-mail',
-            'pass' => 'Senha',
         ];
     }
 }

@@ -14,33 +14,34 @@ let ACTION_USER_LIST = {
 let ACTION_USER_VIEW = {
     type: 'USER_VIEW',
     payload: {
-        fullname: '',
+        name: '',
         email: '',
     },
 };
 
 let callUserListGet = (filter = {}, pg = 1) => (dispatch) => {
     dispatch(callLoader(true))
-    Api.get('/user?pg=' + pg).then((data) => {
+    Api.get('/users?pg=' + pg).then((data) => {
         dispatch(callLoader(false))
         if (!data)
             return
 
-        ACTION_USER_LIST.payload.rows = data.rows
+
+        ACTION_USER_LIST.payload.rows = data.data
         ACTION_USER_LIST.payload.total = data.total
-        ACTION_USER_LIST.payload.pagination = data.pagination
+        ACTION_USER_LIST.payload.pagination = []
         dispatch(ACTION_USER_LIST)
     })
 }
 
 let callUserViewGet = (id) => (dispatch) => {
     dispatch(callLoader(true))
-    Api.get('/user/' + id).then((data) => {
+    Api.get('/users/' + id).then((data) => {
         dispatch(callLoader(false))
         if (!data)
             return
 
-        ACTION_USER_VIEW.payload.fullname = data.fullname
+        ACTION_USER_VIEW.payload.name = data.name
         ACTION_USER_VIEW.payload.email = data.email
         dispatch(ACTION_USER_VIEW)
     })
@@ -48,7 +49,7 @@ let callUserViewGet = (id) => (dispatch) => {
 
 let callUserPost = (data, success = () => { }) => (dispatch) => {
     dispatch(callLoader(true))
-    Api.post('/user?urldecode=1', data).then((data) => {
+    Api.post('/users', data).then((data) => {
         dispatch(callLoader(false))
         if (!data)
             return
@@ -60,7 +61,7 @@ let callUserPost = (data, success = () => { }) => (dispatch) => {
 
 let callUserPut = (id, data, success = () => { }) => (dispatch) => {
     dispatch(callLoader(true))
-    Api.put('/user/' + id + '?urldecode=1', data).then((data) => {
+    Api.put('/users/' + id, data).then((data) => {
         dispatch(callLoader(false))
         if (!data)
             return
@@ -71,14 +72,14 @@ let callUserPut = (id, data, success = () => { }) => (dispatch) => {
 }
 
 let callUserClearView = () => (dispatch) => {
-    ACTION_USER_VIEW.payload.fullname = ''
+    ACTION_USER_VIEW.payload.name = ''
     ACTION_USER_VIEW.payload.email = ''
     dispatch(ACTION_USER_VIEW)
 }
 
 let callUserDelete = (id, success = () => { }) => (dispatch) => {
     dispatch(callLoader(true))
-    Api.delete('/user/' + id).then((data) => {
+    Api.delete('/users/' + id).then((data) => {
         dispatch(callLoader(false))
         if (!data)
             return
