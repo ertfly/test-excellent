@@ -19,11 +19,14 @@ let ACTION_USER_VIEW = {
 };
 
 let callUserListGet = (filter = {}, pg = 1) => (dispatch) => {
+    const loader = toast.loading("Buscando registros...")
     Api.get('/users?page=' + pg).then((data) => {
-        if (!data)
+        if (!data) {
+            toast.dismiss(loader)
             return
+        }
 
-
+        toast.dismiss(loader)
         ACTION_USER_LIST.payload.rows = data.data
         ACTION_USER_LIST.payload.total = data.total
         ACTION_USER_LIST.payload.pagination = []
@@ -32,10 +35,14 @@ let callUserListGet = (filter = {}, pg = 1) => (dispatch) => {
 }
 
 let callUserViewGet = (id) => (dispatch) => {
+    const loader = toast.loading("Buscando detalhes do registro...")
     Api.get('/users/' + id).then((data) => {
-        if (!data)
+        if (!data) {
+            toast.dismiss(loader)
             return
+        }
 
+        toast.dismiss(loader)
         ACTION_USER_VIEW.payload.name = data.name
         ACTION_USER_VIEW.payload.email = data.email
         dispatch(ACTION_USER_VIEW)
@@ -43,21 +50,27 @@ let callUserViewGet = (id) => (dispatch) => {
 }
 
 let callUserPost = (data, success = () => { }) => (dispatch) => {
+    const loader = toast.loading("Cadastrando novo registro...")
     Api.post('/users', data).then((data) => {
-        if (!data)
+        if (!data) {
+            toast.dismiss(loader)
             return
+        }
 
-        toast.success(data.msg)
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false, autoClose: 5000 })
         success()
     })
 }
 
 let callUserPut = (id, data, success = () => { }) => (dispatch) => {
+    const loader = toast.loading("Alterando registro...")
     Api.put('/users/' + id, data).then((data) => {
-        if (!data)
+        if (!data) {
+            toast.dismiss(loader)
             return
+        }
 
-        toast.success(data.msg)
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false, autoClose: 5000 })
         success()
     })
 }
@@ -69,11 +82,14 @@ let callUserClearView = () => (dispatch) => {
 }
 
 let callUserDelete = (id, success = () => { }) => (dispatch) => {
+    const loader = toast.loading("Excluindo registro...")
     Api.delete('/users/' + id).then((data) => {
-        if (!data)
+        if (!data) {
+            toast.dismiss(loader)
             return
+        }
 
-        toast.success(data.msg)
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false, autoClose: 5000 })
         success()
     })
 }
