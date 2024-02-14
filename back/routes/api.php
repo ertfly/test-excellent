@@ -28,3 +28,4 @@ Route::middleware('with-token')->post('/users', [UsersController::class, 'create
 Route::middleware('with-token')->get('/users/{id}', [UsersController::class, 'view']);
 Route::middleware('with-token')->put('/users/{id}', [UsersController::class, 'update']);
 Route::middleware('with-token')->delete('/users/{id}', [UsersController::class, 'delete']);
+

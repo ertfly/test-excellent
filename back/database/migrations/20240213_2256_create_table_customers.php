@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 250)->index('idx_users_name');
-            $table->string('email', 250)->index('idx_users_email');
-            $table->string('pass', 250);
-            $table->boolean('trash')->default(false)->index('idx_users_trash');
+            $table->string('name', 250)->index('idx_customers_name');
+            $table->boolean('trash')->default(false)->index('idx_customers_trash');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('customers');
     }
 };
