@@ -39,6 +39,16 @@ let ProductEdit = ({ setPageAttr, methods: { callProductPost, callProductViewGet
                     active: true,
                     to: '/products/edit/' + id,
                     label: 'Editar'
+                },
+                {
+                    active: false,
+                    to: '/products/stock/' + id,
+                    label: 'Estoque'
+                },
+                {
+                    active: false,
+                    to: '/products/images/' + id,
+                    label: 'Imagens'
                 }
             ]
         }
