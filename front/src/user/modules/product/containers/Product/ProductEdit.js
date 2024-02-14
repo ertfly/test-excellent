@@ -7,11 +7,12 @@ import InputMask from "../../../../../common/containers/InputMask"
 
 let ProductEdit = ({ setPageAttr, methods: { callProductPost, callProductViewGet, callProductPut }, view }) => {
     const params = useParams()
-    const [id] = useState(!params.id ? '' : params.id)
+    const [id, setId] = useState(!params.id ? '' : params.id)
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
 
     useEffect(() => {
+        console.log('entrando')
         let tabs
         if (!id) {
             tabs = [
@@ -55,10 +56,12 @@ let ProductEdit = ({ setPageAttr, methods: { callProductPost, callProductViewGet
         setPrice(view.price)
     }, [view])
 
-    const finishedSubmit = () => {
-        setName('')
-        setPrice('')
-        window.navigate('/products')
+    const finishedSubmit = (id = null) => {
+        if(id){
+            setId(id)
+            window.navigate('/products/edit/' + id)
+            return;
+        }
     }
 
     const submit = (e) => {
@@ -69,7 +72,7 @@ let ProductEdit = ({ setPageAttr, methods: { callProductPost, callProductViewGet
         }
 
         if (!id) {
-            callProductPost(data, () => finishedSubmit())
+            callProductPost(data, (id) => finishedSubmit(id))
         } else {
             callProductPut(id, data, () => finishedSubmit())
         }

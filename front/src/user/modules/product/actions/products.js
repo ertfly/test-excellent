@@ -58,7 +58,7 @@ let callProductPost = (data, success = () => { }) => (dispatch) => {
         }
 
         toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false, autoClose: 5000 })
-        success()
+        success(data.id)
     })
 }
 

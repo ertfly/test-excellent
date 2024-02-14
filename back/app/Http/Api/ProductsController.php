@@ -21,7 +21,10 @@ class ProductsController
         $product->price = NumberHelper::toDecimal(urldecode($request->price), 2);
         $product->save();
 
-        return response()->json(['msg' => 'Produto cadastrado com sucesso!']);
+        return response()->json([
+            'id' => $product->id,
+            'msg' => 'Produto cadastrado com sucesso!'
+        ]);
     }
 
     public function view(int $id)
