@@ -14,7 +14,7 @@ let Dashboard = () => {
     )
 }
 
-const mapStateToProps = ({  }) => ({
+const mapStateToProps = () => ({
     
 });
 

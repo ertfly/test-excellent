@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { callAuthDelete } from '../actions/app'
 
-const HeaderLogged = ({ callAuthDelete }) => {
+const HeaderLogged = ({ username, callAuthDelete }) => {
     const logout = () => {
         Swal.fire({
             title: 'Deseja se desconectar do sistema?', 
@@ -31,7 +31,7 @@ const HeaderLogged = ({ callAuthDelete }) => {
                 </div>
                 <div className='icons-item profile cursor-pointer'>
                     <i className='fas fa-user'></i>
-                    <span>Eric</span>
+                    <span>{username}</span>
                 </div>
                 <div className='icons-item logout cursor-pointer' onClick={logout}>
                     <i className='fas fa-sign-out-alt'></i>
@@ -41,7 +41,8 @@ const HeaderLogged = ({ callAuthDelete }) => {
     )
 }
 
-const mapStateToProps = ({  }) => ({
+const mapStateToProps = ({ app }) => ({
+    username: app.session.name
 });
 
 const mapDispatchToProps = (dispatch) =>

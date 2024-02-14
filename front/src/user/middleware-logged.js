@@ -4,14 +4,22 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Loader from '../common/containers/Loader'
-import { useEffect, useState } from 'react';
-import { callTokenPost } from '../common/actions/app';
+import { useEffect } from 'react';
 import { callAuthGet } from './common/actions/app';
 import routes from './routes';
 import Menu from './common/containers/Menu';
 
 
-let MiddlewareLogged = ({ loader, header, children }) => {
+let MiddlewareLogged = ({ loader, logged, header, children, methods: { callAuthGet } }) => {
+
+    useEffect(() => {
+        callAuthGet();
+    },[callAuthGet])
+
+    if(!logged){
+        return <Navigate to={'/account/login'} />
+    }
+
     return (
         <>
             <Loader show={loader} />
@@ -32,13 +40,13 @@ let MiddlewareLogged = ({ loader, header, children }) => {
 }
 
 const mapStateToProps = ({ app }) => ({
+    logged: app.session.logged,
     loader: app.loader
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    configMethods: bindActionCreators(
+    methods: bindActionCreators(
         {
-            callTokenPost,
             callAuthGet
         },
         dispatch
