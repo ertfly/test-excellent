@@ -16,7 +16,11 @@ let MiddlewareLogged = ({ loader, logged, header, children, methods: { callAuthG
         callAuthGet();
     },[callAuthGet])
 
-    if(!logged){
+    if(!logged && loader){
+        return <Loader show={true} />
+    }
+
+    if(!logged && !loader){
         return <Navigate to={'/account/login'} />
     }
 

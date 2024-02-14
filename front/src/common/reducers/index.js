@@ -2,7 +2,7 @@ import { ACTION_APP_SESSION } from "../../user/common/actions/app"
 import { ACTION_APP_LOADER } from "../actions/app"
 
 let initialReducer = {
-    loader: false,
+    loader: true,
     session: {
         logged: false,
         name: '',
