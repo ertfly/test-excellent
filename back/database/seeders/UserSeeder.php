@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = Users::create([
+        Users::create([
             'name' => 'Usuário de Teste',
             'email' => 'test@test.com',
             'pass' => password_hash('123', PASSWORD_DEFAULT),

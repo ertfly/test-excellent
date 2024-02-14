@@ -12,7 +12,7 @@ class CustomerSeeder extends Seeder
      */
     public function run(): void
     {
-        $customer = Customers::create([
+        Customers::create([
             'name' => 'Cliente Teste',
         ]);
     }
