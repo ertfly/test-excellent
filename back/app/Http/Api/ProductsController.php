@@ -11,7 +11,7 @@ class ProductsController
 {
     public function index()
     {
-        return Products::select('id', 'name', 'created_at')->where('trash', false)->paginate(10);
+        return Products::select('id', 'name', 'price', 'created_at')->where('trash', false)->paginate(10);
     }
 
     public function create(ProductForm $request)

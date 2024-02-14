@@ -18,6 +18,12 @@ let TableView = ({ headers = [], rows = [], total = null, pagination = null, pag
                                 switch (b.type) {
                                     case 'info':
                                         return <td key={bi} className={'text-' + b.align}>{a[b.name]}</td>
+                                    case 'money':
+                                        return (
+                                            <td key={bi} className={'text-' + b.align}>
+                                                {Number(a[b.name]).toFixed(2).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
+                                            </td>
+                                        )
                                     case 'datetime':
                                         let date = a[b.name]
                                         if(date){

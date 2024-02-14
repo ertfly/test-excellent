@@ -33,9 +33,9 @@ let ProductList = ({ setPageAttr, list, methods: { callProductListGet, callProdu
             label: 'Nome'
         },
         {
-            type: 'info',
+            type: 'money',
             name: 'price',
-            align: 'left',
+            align: 'right',
             label: 'Preço(R$)'
         },
         {

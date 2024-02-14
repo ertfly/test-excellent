@@ -108,7 +108,7 @@ const mapDispatchToProps = (dispatch) => ({
         {
             callProductViewGet,
             callProductPost,
-            callProductPut,
+            callProductPut
         },
         dispatch
     )
