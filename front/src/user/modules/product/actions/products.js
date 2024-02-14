@@ -57,7 +57,7 @@ let callProductPost = (data, success = () => { }) => (dispatch) => {
             return
         }
 
-        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false })
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false, autoClose: 5000 })
         success()
     })
 }
@@ -70,7 +70,7 @@ let callProductPut = (id, data, success = () => { }) => (dispatch) => {
             return
         }
 
-        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false })
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false, autoClose: 5000 })
         success()
     })
 }
@@ -89,7 +89,7 @@ let callProductDelete = (id, success = () => { }) => (dispatch) => {
             return
         }
 
-        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false })
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false, autoClose: 5000 })
         success()
     })
 }

@@ -55,7 +55,7 @@ let callCustomerPost = (data, success = () => { }) => (dispatch) => {
             return
         }
 
-        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false })
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false, autoClose: 5000 })
         success()
     })
 }
@@ -68,7 +68,7 @@ let callCustomerPut = (id, data, success = () => { }) => (dispatch) => {
             return
         }
 
-        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false })
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false, autoClose: 5000 })
         success()
     })
 }
@@ -86,7 +86,7 @@ let callCustomerDelete = (id, success = () => { }) => (dispatch) => {
             return
         }
 
-        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false })
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false, autoClose: 5000 })
         success()
     })
 }
