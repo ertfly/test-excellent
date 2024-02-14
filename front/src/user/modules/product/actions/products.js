@@ -21,8 +21,10 @@ let ACTION_PRODUCT_VIEW = {
 let callProductListGet = (filter = {}, pg = 1) => (dispatch) => {
     const loader = toast.loading("Buscando registros...")
     Api.get('/products?page=' + pg).then((data) => {
-        if (!data)
+        if (!data){
+            toast.update(loader, { render: 'Ocorreu alguns erros na sua solicitação', type: toast.TYPE.ERROR, isLoading: false, autoClose: 5000 })
             return
+        }
 
         toast.dismiss(loader.current)
         ACTION_PRODUCT_LIST.payload.rows = data.data
@@ -35,8 +37,10 @@ let callProductListGet = (filter = {}, pg = 1) => (dispatch) => {
 let callProductViewGet = (id) => (dispatch) => {
     const loader = toast.loading("Buscando detalhes do registro...")
     Api.get('/products/' + id).then((data) => {
-        if (!data)
+        if (!data){
+            toast.update(loader, { render: 'Ocorreu alguns erros na sua solicitação', type: toast.TYPE.ERROR, isLoading: false, autoClose: 5000 })
             return
+        }
 
         toast.dismiss(loader.current)
         ACTION_PRODUCT_VIEW.payload.name = data.name
@@ -48,10 +52,12 @@ let callProductViewGet = (id) => (dispatch) => {
 let callProductPost = (data, success = () => { }) => (dispatch) => {
     const loader = toast.loading("Cadastrando novo produto...")
     Api.post('/products', data).then((data) => {
-        if (!data)
+        if (!data){
+            toast.update(loader, { render: 'Ocorreu alguns erros na sua solicitação', type: toast.TYPE.ERROR, isLoading: false, autoClose: 5000 })
             return
+        }
 
-        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false })
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false, autoClose: 5000 })
         success()
     })
 }
@@ -59,10 +65,12 @@ let callProductPost = (data, success = () => { }) => (dispatch) => {
 let callProductPut = (id, data, success = () => { }) => (dispatch) => {
     const loader = toast.loading("Alterando produto...")
     Api.put('/products/' + id, data).then((data) => {
-        if (!data)
+        if (!data){
+            toast.update(loader, { render: 'Ocorreu alguns erros na sua solicitação', type: toast.TYPE.ERROR, isLoading: false, autoClose: 5000 })
             return
+        }
 
-        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false })
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false, autoClose: 5000 })
         success()
     })
 }
@@ -76,10 +84,12 @@ let callProductClearView = () => (dispatch) => {
 let callProductDelete = (id, success = () => { }) => (dispatch) => {
     const loader = toast.loading("Excluindo produto...")
     Api.delete('/products/' + id).then((data) => {
-        if (!data)
+        if (!data){
+            toast.update(loader, { render: 'Ocorreu alguns erros na sua solicitação', type: toast.TYPE.ERROR, isLoading: false, autoClose: 5000 })
             return
+        }
 
-        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false })
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false, autoClose: 5000 })
         success()
     })
 }
