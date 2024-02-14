@@ -20,9 +20,7 @@ let ACTION_PRODUCT_VIEW = {
 };
 
 let callProductListGet = (filter = {}, pg = 1) => (dispatch) => {
-    dispatch(callLoader(true))
     Api.get('/products?page=' + pg).then((data) => {
-        dispatch(callLoader(false))
         if (!data)
             return
 
@@ -35,9 +33,7 @@ let callProductListGet = (filter = {}, pg = 1) => (dispatch) => {
 }
 
 let callProductViewGet = (id) => (dispatch) => {
-    dispatch(callLoader(true))
     Api.get('/products/' + id).then((data) => {
-        dispatch(callLoader(false))
         if (!data)
             return
 
@@ -48,9 +44,7 @@ let callProductViewGet = (id) => (dispatch) => {
 }
 
 let callProductPost = (data, success = () => { }) => (dispatch) => {
-    dispatch(callLoader(true))
     Api.post('/products', data).then((data) => {
-        dispatch(callLoader(false))
         if (!data)
             return
 
@@ -62,7 +56,6 @@ let callProductPost = (data, success = () => { }) => (dispatch) => {
 let callProductPut = (id, data, success = () => { }) => (dispatch) => {
     dispatch(callLoader(true))
     Api.put('/products/' + id, data).then((data) => {
-        dispatch(callLoader(false))
         if (!data)
             return
 
@@ -80,7 +73,6 @@ let callProductClearView = () => (dispatch) => {
 let callProductDelete = (id, success = () => { }) => (dispatch) => {
     dispatch(callLoader(true))
     Api.delete('/products/' + id).then((data) => {
-        dispatch(callLoader(false))
         if (!data)
             return
 

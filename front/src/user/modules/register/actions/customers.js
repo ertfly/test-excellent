@@ -19,9 +19,7 @@ let ACTION_CUSTOMER_VIEW = {
 };
 
 let callCustomerListGet = (filter = {}, pg = 1) => (dispatch) => {
-    dispatch(callLoader(true))
     Api.get('/customers?page=' + pg).then((data) => {
-        dispatch(callLoader(false))
         if (!data)
             return
 
@@ -33,9 +31,7 @@ let callCustomerListGet = (filter = {}, pg = 1) => (dispatch) => {
 }
 
 let callCustomerViewGet = (id) => (dispatch) => {
-    dispatch(callLoader(true))
     Api.get('/customers/' + id).then((data) => {
-        dispatch(callLoader(false))
         if (!data)
             return
 
@@ -45,9 +41,7 @@ let callCustomerViewGet = (id) => (dispatch) => {
 }
 
 let callCustomerPost = (data, success = () => { }) => (dispatch) => {
-    dispatch(callLoader(true))
     Api.post('/customers', data).then((data) => {
-        dispatch(callLoader(false))
         if (!data)
             return
 
@@ -57,9 +51,7 @@ let callCustomerPost = (data, success = () => { }) => (dispatch) => {
 }
 
 let callCustomerPut = (id, data, success = () => { }) => (dispatch) => {
-    dispatch(callLoader(true))
     Api.put('/customers/' + id + '', data).then((data) => {
-        dispatch(callLoader(false))
         if (!data)
             return
 
@@ -74,9 +66,7 @@ let callCustomerClearView = () => (dispatch) => {
 }
 
 let callCustomerDelete = (id, success = () => { }) => (dispatch) => {
-    dispatch(callLoader(true))
     Api.delete('/customers/' + id).then((data) => {
-        dispatch(callLoader(false))
         if (!data)
             return
 
