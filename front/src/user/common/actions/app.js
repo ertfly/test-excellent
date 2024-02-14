@@ -10,7 +10,6 @@ let ACTION_APP_SESSION = {
 };
 
 let callAuthGet = () => async (dispatch) => {
-    dispatch(callLoader(true))
     await Api.get('/auth').then((data) => {
         dispatch(callLoader(false))
         if (!data)
