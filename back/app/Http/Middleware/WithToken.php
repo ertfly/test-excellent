@@ -14,14 +14,14 @@ class WithToken
         try {
             $auth = $request->cookie('auth');
             if (!$auth) {
-                throw new Exception('Sessão finalizada, acesse novamente!');
+                throw new Exception('Sessão finalizada, acesse novamente!', 3);
             }
 
 
             $jwt = new JWTHelper(getenv('APP_KEY'));
             $decoded = $jwt->decode($auth);
             if (!($decoded['id'] ?? null)) {
-                throw new Exception('Sessão finalizada, acesse novamente!');
+                throw new Exception('Sessão finalizada, acesse novamente!', 3);
             }
 
             $result = $next($request)?->original;

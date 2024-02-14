@@ -23,7 +23,7 @@ const traitResponse = ({ data, response }) => {
 
   if (response.code !== 0) {
     if (typeof (response.msg) == 'object') {
-      for(let i in response.msg) {
+      for (let i in response.msg) {
         toast.error(response.msg[i])
       }
     } else {
@@ -38,7 +38,7 @@ const traitResponse = ({ data, response }) => {
       window.navigate(-1)
       return false
     case 3:
-      window.navigate('/account/login')
+      document.location.href = '/account/login'
       return false
     case 4:
       window.location.href = '/'
