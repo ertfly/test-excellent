@@ -50,7 +50,7 @@ let callProductViewGet = (id) => (dispatch) => {
 }
 
 let callProductPost = (data, success = () => { }) => (dispatch) => {
-    const loader = toast.loading("Cadastrando novo produto...")
+    const loader = toast.loading("Cadastrando novo registro...")
     Api.post('/products', data).then((data) => {
         if (!data){
             toast.dismiss(loader)
@@ -63,7 +63,7 @@ let callProductPost = (data, success = () => { }) => (dispatch) => {
 }
 
 let callProductPut = (id, data, success = () => { }) => (dispatch) => {
-    const loader = toast.loading("Alterando produto...")
+    const loader = toast.loading("Alterando registro...")
     Api.put('/products/' + id, data).then((data) => {
         if (!data){
             toast.dismiss(loader)
@@ -82,7 +82,7 @@ let callProductClearView = () => (dispatch) => {
 }
 
 let callProductDelete = (id, success = () => { }) => (dispatch) => {
-    const loader = toast.loading("Excluindo produto...")
+    const loader = toast.loading("Excluindo registro...")
     Api.delete('/products/' + id).then((data) => {
         if (!data){
             toast.dismiss(loader)
