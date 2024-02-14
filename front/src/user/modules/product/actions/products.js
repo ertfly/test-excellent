@@ -19,11 +19,12 @@ let ACTION_PRODUCT_VIEW = {
 };
 
 let callProductListGet = (filter = {}, pg = 1) => (dispatch) => {
+    const loader = toast.loading("Buscando registros...")
     Api.get('/products?page=' + pg).then((data) => {
         if (!data)
             return
 
-        console.log(data.rows)
+        toast.dismiss(loader.current)
         ACTION_PRODUCT_LIST.payload.rows = data.data
         ACTION_PRODUCT_LIST.payload.total = data.total
         ACTION_PRODUCT_LIST.payload.pagination = []
@@ -32,10 +33,12 @@ let callProductListGet = (filter = {}, pg = 1) => (dispatch) => {
 }
 
 let callProductViewGet = (id) => (dispatch) => {
+    const loader = toast.loading("Buscando detalhes do registro...")
     Api.get('/products/' + id).then((data) => {
         if (!data)
             return
 
+        toast.dismiss(loader.current)
         ACTION_PRODUCT_VIEW.payload.name = data.name
         ACTION_PRODUCT_VIEW.payload.price = data.price
         dispatch(ACTION_PRODUCT_VIEW)
@@ -43,21 +46,23 @@ let callProductViewGet = (id) => (dispatch) => {
 }
 
 let callProductPost = (data, success = () => { }) => (dispatch) => {
+    const loader = toast.loading("Cadastrando novo produto...")
     Api.post('/products', data).then((data) => {
         if (!data)
             return
 
-        toast.success(data.msg)
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false })
         success()
     })
 }
 
 let callProductPut = (id, data, success = () => { }) => (dispatch) => {
+    const loader = toast.loading("Alterando produto...")
     Api.put('/products/' + id, data).then((data) => {
         if (!data)
             return
 
-        toast.success(data.msg)
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false })
         success()
     })
 }
@@ -69,11 +74,12 @@ let callProductClearView = () => (dispatch) => {
 }
 
 let callProductDelete = (id, success = () => { }) => (dispatch) => {
+    const loader = toast.loading("Excluindo produto...")
     Api.delete('/products/' + id).then((data) => {
         if (!data)
             return
 
-        toast.success(data.msg)
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false })
         success()
     })
 }
