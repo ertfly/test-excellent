@@ -3,9 +3,6 @@ import { Link } from "react-router-dom"
 
 let TableView = ({ headers = [], rows = [], total = null, pagination = null, paginationTo = '/' }) => {
     moment.locale('pt-br')
-    const numberFormat = (number) => {
-        return number.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-    }
     return (
         <div className="table-responsive">
             <table className="table table-hover table-striped">
@@ -24,7 +21,7 @@ let TableView = ({ headers = [], rows = [], total = null, pagination = null, pag
                                     case 'money':
                                         return (
                                             <td key={bi} className={'text-' + b.align}>
-                                                {numberFormat(Number(a[b.name]), 2)}
+                                                {Number(a[b.name]).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                                             </td>
                                         )
                                     case 'datetime':
