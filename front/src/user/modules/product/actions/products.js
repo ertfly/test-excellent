@@ -1,6 +1,5 @@
 import { toast } from "react-toastify";
 import Api from '../../../../axios'
-import { callLoader } from '../../../../common/actions/app'
 
 let ACTION_PRODUCT_LIST = {
     type: 'PRODUCT_LIST',
@@ -54,7 +53,6 @@ let callProductPost = (data, success = () => { }) => (dispatch) => {
 }
 
 let callProductPut = (id, data, success = () => { }) => (dispatch) => {
-    dispatch(callLoader(true))
     Api.put('/products/' + id, data).then((data) => {
         if (!data)
             return
@@ -71,7 +69,6 @@ let callProductClearView = () => (dispatch) => {
 }
 
 let callProductDelete = (id, success = () => { }) => (dispatch) => {
-    dispatch(callLoader(true))
     Api.delete('/products/' + id).then((data) => {
         if (!data)
             return

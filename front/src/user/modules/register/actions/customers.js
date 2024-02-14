@@ -1,6 +1,5 @@
 import { toast } from "react-toastify";
 import Api from '../../../../axios'
-import { callLoader } from '../../../../common/actions/app'
 
 let ACTION_CUSTOMER_LIST = {
     type: 'CUSTOMER_LIST',
