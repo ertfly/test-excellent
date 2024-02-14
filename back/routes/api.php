@@ -3,8 +3,8 @@
 use App\Http\Api\AuthController;
 use App\Http\Api\CustomersController;
 use App\Http\Api\PongController;
+use App\Http\Api\ProductsController;
 use App\Http\Api\UsersController;
-use App\Models\Users;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,4 +35,10 @@ Route::middleware('with-token')->post('/customers', [CustomersController::class,
 Route::middleware('with-token')->get('/customers/{id}', [CustomersController::class, 'view']);
 Route::middleware('with-token')->put('/customers/{id}', [CustomersController::class, 'update']);
 Route::middleware('with-token')->delete('/customers/{id}', [CustomersController::class, 'delete']);
+
+Route::middleware('with-token')->get('/products', [ProductsController::class, 'index']);
+Route::middleware('with-token')->post('/products', [ProductsController::class, 'create']);
+Route::middleware('with-token')->get('/products/{id}', [ProductsController::class, 'view']);
+Route::middleware('with-token')->put('/products/{id}', [ProductsController::class, 'update']);
+Route::middleware('with-token')->delete('/products/{id}', [ProductsController::class, 'delete']);
 

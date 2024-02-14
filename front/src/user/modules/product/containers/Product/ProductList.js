@@ -28,12 +28,6 @@ let ProductList = ({ setPageAttr, list, methods: { callProductListGet, callProdu
     const headers = [
         {
             type: 'info',
-            name: 'category',
-            align: 'left',
-            label: 'Categoria'
-        },
-        {
-            type: 'info',
             name: 'name',
             align: 'left',
             label: 'Nome'
@@ -45,14 +39,8 @@ let ProductList = ({ setPageAttr, list, methods: { callProductListGet, callProdu
             label: 'Preço(R$)'
         },
         {
-            type: 'info',
-            name: 'cost',
-            align: 'left',
-            label: 'Custo(R$)'
-        },
-        {
-            type: 'info',
-            name: 'createdAt',
+            type: 'datetime',
+            name: 'created_at',
             align: 'right',
             label: 'Cadastro'
         },

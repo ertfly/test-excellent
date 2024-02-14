@@ -2,7 +2,7 @@
 
 namespace App\Http\Api;
 
-use App\Helpers\JWTHelpers;
+use App\Helpers\JWTHelper;
 use App\Http\Requests\AuthPost;
 use App\Models\Users;
 use Exception;
@@ -18,7 +18,7 @@ class AuthController
             throw new Exception('Usuário ou senha inválidos!');
         }
 
-        $jwt = new JWTHelpers(getenv('APP_KEY'));
+        $jwt = new JWTHelper(getenv('APP_KEY'));
         $token = $jwt->encode([
             'id' => $user->id,
             'name' => $user->name,
@@ -37,7 +37,7 @@ class AuthController
         $name = '';
 
         if ($auth) {
-            $jwt = new JWTHelpers(getenv('APP_KEY'));
+            $jwt = new JWTHelper(getenv('APP_KEY'));
             $decoded = $jwt->decode($auth);
             if (($decoded['id'] ?? null)) {
                 $logged = true;

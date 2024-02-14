@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-class JWTHelpers
+class JWTHelper
 {
     private $secret;
 

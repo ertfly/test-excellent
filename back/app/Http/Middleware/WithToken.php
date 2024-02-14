@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Helpers\JWTHelpers;
+use App\Helpers\JWTHelper;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class WithToken
             }
 
 
-            $jwt = new JWTHelpers(getenv('APP_KEY'));
+            $jwt = new JWTHelper(getenv('APP_KEY'));
             $decoded = $jwt->decode($auth);
             if (!($decoded['id'] ?? null)) {
                 throw new Exception('Sessão finalizada, acesse novamente!');

@@ -46,7 +46,7 @@ let callCustomerViewGet = (id) => (dispatch) => {
 
 let callCustomerPost = (data, success = () => { }) => (dispatch) => {
     dispatch(callLoader(true))
-    Api.post('/customers?urldecode=1', data).then((data) => {
+    Api.post('/customers', data).then((data) => {
         dispatch(callLoader(false))
         if (!data)
             return
@@ -58,7 +58,7 @@ let callCustomerPost = (data, success = () => { }) => (dispatch) => {
 
 let callCustomerPut = (id, data, success = () => { }) => (dispatch) => {
     dispatch(callLoader(true))
-    Api.put('/customers/' + id + '?urldecode=1', data).then((data) => {
+    Api.put('/customers/' + id + '', data).then((data) => {
         dispatch(callLoader(false))
         if (!data)
             return

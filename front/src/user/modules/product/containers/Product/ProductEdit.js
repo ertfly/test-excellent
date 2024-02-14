@@ -3,21 +3,15 @@ import { connect } from "react-redux"
 import { Link, useParams } from "react-router-dom"
 import { bindActionCreators } from "redux"
 import { callProductViewGet, callProductPost, callProductPut } from "../../actions/products"
-import { callProductCategorySelectGet } from "../../actions/productCategories"
 import InputMask from "../../../../../common/containers/InputMask"
-import { Typeahead } from 'react-bootstrap-typeahead';
-import 'react-bootstrap-typeahead/css/Typeahead.css';
 
-let ProductEdit = ({ setPageAttr, methods: { callProductPost, callProductViewGet, callProductPut, callProductCategorySelectGet }, view, selectCategories }) => {
+let ProductEdit = ({ setPageAttr, methods: { callProductPost, callProductViewGet, callProductPut }, view }) => {
     const params = useParams()
     const [id] = useState(!params.id ? '' : params.id)
-    const [categoryId, setCategoryId] = useState([])
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
-    const [cost, setCost] = useState('')
 
     useEffect(() => {
-        callProductCategorySelectGet()
         let tabs
         if (!id) {
             tabs = [
@@ -54,30 +48,24 @@ let ProductEdit = ({ setPageAttr, methods: { callProductPost, callProductViewGet
             btns: [],
             tabs: tabs
         })
-    }, [setPageAttr, id, callProductViewGet, callProductCategorySelectGet])
+    }, [setPageAttr, id, callProductViewGet])
 
     useEffect(() => {
-        setCategoryId([{ id: view.categoryId, description: view.category }])
         setName(view.name)
         setPrice(view.price)
-        setCost(view.cost)
     }, [view])
 
     const finishedSubmit = () => {
-        setCategoryId([])
         setName('')
         setPrice('')
-        setCost('')
         window.navigate('/products')
     }
 
     const submit = (e) => {
         e.preventDefault()
         let data = {
-            categoryId: categoryId.length>0 ? categoryId[0].id : '',
             name: encodeURI(name),
-            price: price,
-            cost: cost
+            price: encodeURI(price),
         }
 
         if (!id) {
@@ -97,23 +85,8 @@ let ProductEdit = ({ setPageAttr, methods: { callProductPost, callProductViewGet
                             <input type="text" className="form-control" value={name} onChange={e => setName(e.target.value)} />
                         </div>
                         <div className="col-md-6 form-group">
-                            <label className="required">Categoria</label>
-                            <Typeahead
-                                id="category"
-                                labelKey="description"
-                                onChange={(e) => setCategoryId(e)}
-                                options={selectCategories}
-                                placeholder="Selecione a categoria"
-                                selected={categoryId}
-                            />
-                        </div>
-                        <div className="col-md-6 form-group">
                             <label className="required">Preço(R$):</label>
                             <InputMask mask="dec_2" value={price} onChange={v => setPrice(v)} />
-                        </div>
-                        <div className="col-md-6 form-group">
-                            <label className="required">Custo(R$):</label>
-                            <InputMask mask="dec_2" value={cost} onChange={v => setCost(v)} />
                         </div>
                     </div>
                 </div>
@@ -126,9 +99,8 @@ let ProductEdit = ({ setPageAttr, methods: { callProductPost, callProductViewGet
     )
 }
 
-const mapStateToProps = ({ product: { products: { view }, categories } }) => ({
+const mapStateToProps = ({ product: { products: { view } } }) => ({
     view: view,
-    selectCategories: categories.select
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -137,7 +109,6 @@ const mapDispatchToProps = (dispatch) => ({
             callProductViewGet,
             callProductPost,
             callProductPut,
-            callProductCategorySelectGet
         },
         dispatch
     )

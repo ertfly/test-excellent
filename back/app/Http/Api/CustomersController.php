@@ -15,46 +15,46 @@ class CustomersController
 
     public function create(CustomerForm $request)
     {
-        $user = new Customers();
-        $user->name = urldecode($request->name);
-        $user->save();
+        $customer = new Customers();
+        $customer->name = urldecode($request->name);
+        $customer->save();
 
         return response()->json(['msg' => 'Cliente cadastrado com sucesso!']);
     }
 
     public function view(int $id)
     {
-        $user = Customers::find($id);
-        if (!$user) {
+        $customer = Customers::find($id);
+        if (!$customer) {
             throw new Exception('Cliente não encontrado', 2);
         }
 
         return [
-            'name' => $user->name,
+            'name' => $customer->name,
         ];
     }
 
     public function update(int $id, CustomerForm $request)
     {
-        $user = Customers::find($id);
-        if (!$user) {
+        $customer = Customers::find($id);
+        if (!$customer) {
             throw new Exception('Cliente não encontrado', 2);
         }
 
-        $user->name = urldecode($request->name);
-        $user->save();
+        $customer->name = urldecode($request->name);
+        $customer->save();
 
         return response()->json(['msg' => 'Cliente atualizado com sucesso!']);
     }
 
     public function delete(int $id){
-        $user = Customers::find($id);
-        if (!$user) {
+        $customer = Customers::find($id);
+        if (!$customer) {
             throw new Exception('Cliente não encontrado', 2);
         }
 
-        $user->trash = true;
-        $user->save();
+        $customer->trash = true;
+        $customer->save();
 
         return response()->json(['msg' => 'Cliente excluído com sucesso!']);
     }
