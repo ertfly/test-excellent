@@ -27,6 +27,24 @@ let ProductList = ({ setPageAttr, list, methods: { callProductListGet, callProdu
     }
     const headers = [
         {
+            type: 'custom',
+            align: 'center',
+            style: {
+                width: '100px'
+            },
+            label: 'Foto',
+            custom: (a) => {
+                if(!a.file){
+                    return <></>
+                }
+                return (
+                    <>
+                        <img src={`${process.env.REACT_APP_API_HOST}/storage/products/${a.file}`} className='img-thumb' alt='foto do produto' style={{width:'70px'}} />
+                    </>
+                )
+            }
+        },
+        {
             type: 'info',
             name: 'name',
             align: 'left',
