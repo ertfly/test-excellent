@@ -39,6 +39,19 @@ let callProductImagePost = (data, success = () => { }) => (dispatch) => {
     })
 }
 
+let callProductImagePrincipal = (id, success = () => { }) => (dispatch) => {
+    const loader = toast.loading("Excluindo registro...")
+    Api.get('/product-images/active/' + id).then((data) => {
+        if (!data) {
+            toast.dismiss(loader)
+            return
+        }
+
+        toast.update(loader, { render: data.msg, type: toast.TYPE.SUCCESS, isLoading: false, autoClose: 5000 })
+        success()
+    })
+}
+
 let callProductImageDelete = (id, success = () => { }) => (dispatch) => {
     const loader = toast.loading("Excluindo registro...")
     Api.delete('/product-images/' + id).then((data) => {
@@ -52,4 +65,4 @@ let callProductImageDelete = (id, success = () => { }) => (dispatch) => {
     })
 }
 
-export { callProductImageListGet, callProductImagePost, callProductImageDelete, ACTION_PRODUCT_IMAGE_LIST }
+export { callProductImageListGet, callProductImagePost, callProductImageDelete, callProductImagePrincipal, ACTION_PRODUCT_IMAGE_LIST }

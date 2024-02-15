@@ -2,12 +2,12 @@ import { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import { useParams } from "react-router-dom"
 import { bindActionCreators } from "redux"
-import { callProductImageListGet, callProductImagePost, callProductImageDelete } from "../../actions/productImages"
+import { callProductImageListGet, callProductImagePost, callProductImageDelete, callProductImagePrincipal } from "../../actions/productImages"
 import Helper from "../../../../../Helper"
 import { toast } from "react-toastify"
 import Swal from "sweetalert2"
 
-let ProductImages = ({ setPageAttr, methods: { callProductImageListGet, callProductImagePost, callProductImageDelete }, list }) => {
+let ProductImages = ({ setPageAttr, methods: { callProductImageListGet, callProductImagePost, callProductImageDelete, callProductImagePrincipal }, list }) => {
     const params = useParams()
     const [productId] = useState(!params.productId ? '' : params.productId)
 
@@ -21,6 +21,22 @@ let ProductImages = ({ setPageAttr, methods: { callProductImageListGet, callProd
         }).then((result) => {
             if (result.isConfirmed) {
                 callProductImageDelete(id, () => {
+                    callProductImageListGet(productId)
+                })
+            }
+        })
+    }
+
+    const active = (id) => {
+        Swal.fire({
+            title: 'Tem certeza que deseja tornar essa imagem principal?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Sim',
+            denyButtonText: `Não`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                callProductImagePrincipal(id, () => {
                     callProductImageListGet(productId)
                 })
             }
@@ -107,7 +123,7 @@ let ProductImages = ({ setPageAttr, methods: { callProductImageListGet, callProd
                                     {!a.active ? (
                                         <>
                                             <div style={{ width: '20px' }}></div>
-                                            <button className="btn btn-success flex-fill" type="button"><i className="mr-1 fas fa-check text-white"></i>Principal</button>
+                                            <button onClick={() => active(a.id)} className="btn btn-success flex-fill" type="button"><i className="mr-1 fas fa-check text-white"></i>Principal</button>
                                         </>
                                     ) : <></>}
                                 </div>
@@ -129,7 +145,8 @@ const mapDispatchToProps = (dispatch) => ({
         {
             callProductImageListGet,
             callProductImagePost,
-            callProductImageDelete
+            callProductImageDelete,
+            callProductImagePrincipal
         },
         dispatch
     )
