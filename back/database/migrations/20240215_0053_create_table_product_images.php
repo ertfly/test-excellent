@@ -16,7 +16,6 @@ return new class extends Migration
             $table->integer('product_id')->index('idx_product_images_product_id');
             $table->string('file', 250);
             $table->boolean('active')->default(true)->index('idx_product_images_active');
-            $table->boolean('trash')->default(false)->index('idx_product_images_trash');
             $table->timestamps();
         });
     }
