@@ -17,6 +17,7 @@ class ProductStocksController
             'product_stocks.quantity', 
             'product_stocks.balance', 
             'product_stocks.created_at', 
+            'product_stocks.active', 
             'users.name as user_name')
             ->where('product_stocks.product_id', $productId)
             ->join('users', 'users.id', '=', 'product_stocks.user_id')
@@ -47,6 +48,7 @@ class ProductStocksController
         $decoded = $jwt->decode($request->cookie('auth'));
 
         $productStock = new ProductStocks();
+        $productStock->product_id = $request->productId;
         $productStock->description = $description;
         $productStock->quantity = $quantity;
         $productStock->balance = $balance + $quantity;

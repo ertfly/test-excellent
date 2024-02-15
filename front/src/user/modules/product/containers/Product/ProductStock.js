@@ -41,16 +41,20 @@ let ProductStock = ({ setPageAttr, methods: { callProductStockListGet, callProdu
             label: 'Descrição'
         },
         {
-            type: 'info',
-            name: 'quantity',
+            type: 'custom',
             align: 'center',
-            label: 'Quantidade'
+            label: 'Quantidade',
+            custom: (a) => {
+                return <span className={a.quantity < 0 ? 'text-danger' : 'text-success'}>{a.quantity}</span>
+            }
         },
         {
-            type: 'info',
-            name: 'balance',
+            type: 'custom',
             align: 'center',
-            label: 'Saldo'
+            label: 'Saldo',
+            custom: (a) => {
+                return <span className="text-primary">{a.balance}</span>
+            }
         },
         {
             type: 'info',
@@ -69,6 +73,10 @@ let ProductStock = ({ setPageAttr, methods: { callProductStockListGet, callProdu
             align: 'right',
             label: 'Opções',
             custom: (a) => {
+                if(!a.active){
+                    return <></>
+                }
+                
                 return (
                     <>
                         <span className='btn btn-sm btn-danger ml-2' onClick={() => remove(a.id)}><i className='fas fa-trash'></i></span>

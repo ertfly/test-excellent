@@ -24,7 +24,7 @@ class ProductStockForm extends FormRequest
     public function rules(): array
     {
         return [
-            'productId' => 'required|unique:products,id',
+            'productId' => 'required|exists:products,id',
             'quantity' => 'required|numeric',
             'positive' => 'required|boolean',
         ];
