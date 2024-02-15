@@ -1,3 +1,5 @@
 *
 !.gitignore
-!products/index.html
+!products/product-1.png
+!products/product-2.png
+!products/product-3.png
