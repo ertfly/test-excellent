@@ -11,7 +11,11 @@ class ProductsController
 {
     public function index()
     {
-        return Products::select('id', 'name', 'price', 'created_at')->where('trash', false)->paginate(10);
+        return Products::select('products.id', 'products.name', 'products.price', 'products.created_at', 'product_images.file')
+            ->join('product_images', 'product_images.product_id', '=', 'products.id', 'left')
+            ->where('products.trash', false)
+            ->where('product_images.active', true)
+            ->paginate(10);
     }
 
     public function create(ProductForm $request)
