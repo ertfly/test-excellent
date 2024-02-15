@@ -1,3 +1,4 @@
+import { ACTION_PRODUCT_IMAGE_LIST } from "../actions/productImages";
 import { ACTION_PRODUCT_STOCK_LIST } from "../actions/productStocks";
 import { ACTION_PRODUCT_LIST, ACTION_PRODUCT_VIEW } from "../actions/products";
 
@@ -14,6 +15,13 @@ let initialReducer = {
         },
     },
     productStocks: {
+        list: {
+            rows: [],
+            total: 0,
+            pagination: [],
+        },
+    },
+    productImages: {
         list: {
             rows: [],
             total: 0,
@@ -52,6 +60,18 @@ let ProductReducers = (state = initialReducer, action) => {
                 ...state,
                 productStocks: {
                     ...state.productStocks,
+                    list: {
+                        rows: action.payload.rows,
+                        total: action.payload.total,
+                        pagination: action.payload.pagination
+                    },
+                }
+            };
+        case ACTION_PRODUCT_IMAGE_LIST.type:
+            return {
+                ...state,
+                productImages: {
+                    ...state.productImages,
                     list: {
                         rows: action.payload.rows,
                         total: action.payload.total,

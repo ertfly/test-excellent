@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { connect } from "react-redux"
-import { Link, useParams, useSearchParams } from "react-router-dom"
+import { useParams, useSearchParams } from "react-router-dom"
 import { bindActionCreators } from "redux"
 import { callProductStockListGet, callProductStockPost, callProductStockDelete } from "../../actions/productStocks"
 import InputMask from "../../../../../common/containers/InputMask"
@@ -156,7 +156,6 @@ let ProductStock = ({ setPageAttr, methods: { callProductStockListGet, callProdu
                 </div>
                 <div className="clearfix text-left mt-3">
                     <button className="btn btn-primary" type="submit"><i className="mr-1 fas fa-save fa-white"></i>Salvar</button>
-                    <Link to={'/products'} className="btn btn-secondary ml-3"><i className="fas fa-arrow-left mr-1"></i>Voltar</Link>
                 </div>
             </form>
             <div className="clearfix mt-3">
