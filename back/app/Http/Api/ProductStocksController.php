@@ -79,7 +79,17 @@ class ProductStocksController
             throw new Exception('Lançamento de estoque precisa ser o útimo para ser excluído', 2);
         }
 
+        $lastStockNotActive = ProductStocks::where('product_id', $productStock->product_id)
+            ->where('active', false)
+            ->orderBy('id', 'desc')
+            ->first();
+
         $productStock->delete();
+
+        if($lastStockNotActive){
+            $lastStockNotActive->active = true;
+            $lastStockNotActive->save();
+        }
 
         return response()->json(['msg' => 'Estoque excluído com sucesso!']);
     }
