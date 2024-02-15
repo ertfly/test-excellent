@@ -82,9 +82,10 @@ let ProductImages = ({ setPageAttr, methods: { callProductImageListGet, callProd
             }
 
             let data = {
+                productId: productId,
                 file: base64
             }
-            callProductImagePost(productId, data, () => {
+            callProductImagePost(data, () => {
                 callProductImageListGet(productId)
             })
         })
@@ -100,13 +101,17 @@ let ProductImages = ({ setPageAttr, methods: { callProductImageListGet, callProd
                     return (
                         <div key={ai} className="col-md-3">
                             <div>
-                                <div>
-                                    <img className='img-thumbnail' src={`${process.env.REACT_APP_API_HOST}/storage/products/${a.file}`} alt='foto do produto' style={{ minHeight: '100%', width: '100%' }} />
+                                <div style={{height:'238px'}} className='d-flex align-items-center'>
+                                    <img className='img-thumbnail' src={`${process.env.REACT_APP_API_HOST}/storage/products/${a.file}`} alt='foto do produto' style={{ maxHeight: '100%', width: '100%' }} />
                                 </div>
                                 <div className='d-flex mt-2'>
                                     <button className="btn btn-danger flex-fill" type="button"><i className="mr-1 fas fa-trash fa-white"></i>Deletar</button>
-                                    <div style={{ width: '20px' }}></div>
-                                    <button className="btn btn-success flex-fill" type="button"><i className="mr-1 fas fa-check text-white"></i>Principal</button>
+                                    {!a.active?(
+                                        <>
+                                            <div style={{ width: '20px' }}></div>
+                                            <button className="btn btn-success flex-fill" type="button"><i className="mr-1 fas fa-check text-white"></i>Principal</button>
+                                        </>
+                                    ):<></>}
                                 </div>
                             </div>
                         </div>

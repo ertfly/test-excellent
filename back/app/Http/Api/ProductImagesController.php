@@ -2,10 +2,10 @@
 
 namespace App\Http\Api;
 
-use App\Helpers\JWTHelper;
+use App\Helpers\FileHelper;
+use App\Http\Requests\ProductImageForm;
 use App\Models\ProductImages;
 use Exception;
-use Illuminate\Http\Request;
 
 class ProductImagesController
 {
@@ -21,15 +21,41 @@ class ProductImagesController
             ->paginate(10);
     }
 
-    public function create(Request $request)
+    public function create(ProductImageForm $request)
     {
-        throw new Exception(storage_path('app/public/products/product-1.png'));
+        $file = $request->get('file');
+        if (!$file) {
+            throw new Exception('Selecione uma imagem', 1);
+        }
+
+        $file = FileHelper::base64ToFile($file, storage_path('app/public/products/'), ['image/png'], 'Tipo de arquivo não suportado');
+        if (!is_file(storage_path('app/public/products/' . $file))) {
+            throw new Exception('Ocorreu um erro ao realizar o upload do arquivo, favor tentar novamente.');
+        }
+
+        $productImageActive = ProductImages::where('product_id', $request->get('productId'))
+            ->where('active', true)
+            ->first();
+
+
+        $active = false;
+        if (!$productImageActive) {
+            $active = true;
+        }
+
+        $productImage = new ProductImages();
+        $productImage->product_id = $request->get('productId');
+        $productImage->file = $file;
+        $productImage->active = $active;
+        $productImage->save();
+
         return response()->json([
             'msg' => 'Imagem cadastrada com sucesso!'
         ]);
     }
 
-    public function active(int $id){
+    public function active(int $id)
+    {
         $productImage = ProductImages::find($id);
         if (!$productImage) {
             throw new Exception('Imagem não encontrado', 2);
