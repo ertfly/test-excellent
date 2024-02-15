@@ -13,17 +13,17 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         Products::create([
+            'name' => 'Produto 1',
+            'price' => 150.0
+        ]);
+
+        Products::create([
             'name' => 'Produto 2',
             'price' => 150.0
         ]);
 
         Products::create([
             'name' => 'Produto 3',
-            'price' => 150.0
-        ]);
-
-        Products::create([
-            'name' => 'Produto 4',
             'price' => 150.0
         ]);
     }
