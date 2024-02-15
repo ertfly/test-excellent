@@ -3,6 +3,7 @@
 use App\Http\Api\AuthController;
 use App\Http\Api\CustomersController;
 use App\Http\Api\PongController;
+use App\Http\Api\ProductImagesController;
 use App\Http\Api\ProductsController;
 use App\Http\Api\ProductStocksController;
 use App\Http\Api\UsersController;
@@ -46,3 +47,8 @@ Route::middleware('with-token')->delete('/products/{id}', [ProductsController::c
 Route::middleware('with-token')->get('/product-stocks/{productId}', [ProductStocksController::class, 'index']);
 Route::middleware('with-token')->post('/product-stocks', [ProductStocksController::class, 'create']);
 Route::middleware('with-token')->delete('/product-stocks/{id}', [ProductStocksController::class, 'delete']);
+
+Route::middleware('with-token')->get('/product-images/{productId}', [ProductImagesController::class, 'index']);
+Route::middleware('with-token')->post('/product-images', [ProductImagesController::class, 'create']);
+Route::middleware('with-token')->get('/product-images/active/{id}', [ProductImagesController::class, 'active']);
+Route::middleware('with-token')->delete('/product-images/{id}', [ProductImagesController::class, 'delete']);
