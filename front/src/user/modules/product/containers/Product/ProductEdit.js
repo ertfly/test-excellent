@@ -12,7 +12,6 @@ let ProductEdit = ({ setPageAttr, methods: { callProductPost, callProductViewGet
     const [price, setPrice] = useState('')
 
     useEffect(() => {
-        console.log('entrando')
         let tabs
         if (!id) {
             tabs = [

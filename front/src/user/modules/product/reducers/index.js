@@ -1,3 +1,4 @@
+import { ACTION_PRODUCT_STOCK_LIST } from "../actions/productStocks";
 import { ACTION_PRODUCT_LIST, ACTION_PRODUCT_VIEW } from "../actions/products";
 
 let initialReducer = {
@@ -10,6 +11,13 @@ let initialReducer = {
         view: {
             name: '',
             price: '',
+        },
+    },
+    productStocks: {
+        list: {
+            rows: [],
+            total: 0,
+            pagination: [],
         },
     },
 }
@@ -38,6 +46,18 @@ let ProductReducers = (state = initialReducer, action) => {
                         price: action.payload.price,
                     },
                 },
+            };
+        case ACTION_PRODUCT_STOCK_LIST.type:
+            return {
+                ...state,
+                productStocks: {
+                    ...state.productStocks,
+                    list: {
+                        rows: action.payload.rows,
+                        total: action.payload.total,
+                        pagination: action.payload.pagination
+                    },
+                }
             };
         default:
             return state;

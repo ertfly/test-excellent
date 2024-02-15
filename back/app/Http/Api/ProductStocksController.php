@@ -11,9 +11,15 @@ class ProductStocksController
 {
     public function index(int $productId)
     {
-        return ProductStocks::select('id', 'name', 'price', 'created_at')
-            ->where('trash', false)
-            ->where('product_id', $productId)
+        return ProductStocks::select(
+            'product_stocks.id', 
+            'product_stocks.description', 
+            'product_stocks.quantity', 
+            'product_stocks.balance', 
+            'product_stocks.created_at', 
+            'users.name as user_name')
+            ->where('product_stocks.product_id', $productId)
+            ->join('users', 'users.id', '=', 'product_stocks.user_id')
             ->paginate(10);
     }
 
