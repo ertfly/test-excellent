@@ -12,15 +12,17 @@ class ProductStocksController
     public function index(int $productId)
     {
         return ProductStocks::select(
-            'product_stocks.id', 
-            'product_stocks.description', 
-            'product_stocks.quantity', 
-            'product_stocks.balance', 
-            'product_stocks.created_at', 
-            'product_stocks.active', 
-            'users.name as user_name')
+            'product_stocks.id',
+            'product_stocks.description',
+            'product_stocks.quantity',
+            'product_stocks.balance',
+            'product_stocks.created_at',
+            'product_stocks.active',
+            'users.name as user_name'
+        )
             ->where('product_stocks.product_id', $productId)
             ->join('users', 'users.id', '=', 'product_stocks.user_id')
+            ->orderBy('product_stocks.id', 'desc')
             ->paginate(10);
     }
 
@@ -71,6 +73,10 @@ class ProductStocksController
         $productStock = ProductStocks::find($id);
         if (!$productStock) {
             throw new Exception('Lançamento de estoque não encontrado', 2);
+        }
+
+        if (!$productStock->active) {
+            throw new Exception('Lançamento de estoque precisa ser o útimo para ser excluído', 2);
         }
 
         $productStock->delete();

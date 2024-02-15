@@ -14,7 +14,7 @@ class ProductStockSeeder extends Seeder
     {
         ProductStocks::create([
             'product_id' => 1,
-            'description' => 'Inserindo estoque',
+            'description' => 'Entrada de estoque',
             'quantity' => 10,
             'balance' => 10,
             'active' => true,
@@ -23,7 +23,7 @@ class ProductStockSeeder extends Seeder
 
         ProductStocks::create([
             'product_id' => 2,
-            'description' => 'Inserindo estoque',
+            'description' => 'Entrada de estoque',
             'quantity' => 10,
             'balance' => 10,
             'active' => true,
@@ -32,7 +32,7 @@ class ProductStockSeeder extends Seeder
 
         ProductStocks::create([
             'product_id' => 3,
-            'description' => 'Inserindo estoque',
+            'description' => 'Entrada de estoque',
             'quantity' => 10,
             'balance' => 10,
             'active' => true,
