@@ -17,4 +17,4 @@ RUN chmod +x /usr/bin/php
 COPY . .
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
-CMD bash -c "unzip -o vendor.zip && php -S 0.0.0.0:80 -t public"
+CMD bash -c "composer install && php artisan migrate:fresh --seed && php -S 0.0.0.0:80 -t public"

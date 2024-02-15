@@ -12,4 +12,4 @@ RUN npm install --global serve
 
 COPY . .
 
-CMD bash -c "unzip -o node_modules.zip && yarn prod"
+CMD bash -c "yarn install && yarn prod"
