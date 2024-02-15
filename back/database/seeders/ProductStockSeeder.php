@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ProductStock;
 use Illuminate\Database\Seeder;
 
 class ProductStockSeeder extends Seeder
@@ -11,9 +12,31 @@ class ProductStockSeeder extends Seeder
      */
     public function run(): void
     {
-        /* Products::create([
-            'name' => 'Produto 2',
-            'price' => 150.0
-        ]); */
+        ProductStock::create([
+            'product_id' => 1,
+            'description' => 'Inserindo estoque',
+            'quantity' => 10,
+            'balance' => 10,
+            'active' => true,
+            'user_id' => 1
+        ]);
+
+        ProductStock::create([
+            'product_id' => 2,
+            'description' => 'Inserindo estoque',
+            'quantity' => 10,
+            'balance' => 10,
+            'active' => true,
+            'user_id' => 1
+        ]);
+
+        ProductStock::create([
+            'product_id' => 3,
+            'description' => 'Inserindo estoque',
+            'quantity' => 10,
+            'balance' => 10,
+            'active' => true,
+            'user_id' => 1
+        ]);
     }
 }
