@@ -3,6 +3,8 @@ import { connect } from "react-redux"
 import { useParams } from "react-router-dom"
 import { bindActionCreators } from "redux"
 import { callProductImageListGet, callProductImagePost, callProductImageDelete } from "../../actions/productImages"
+import Helper from "../../../../../Helper"
+import { toast } from "react-toastify"
 // import Swal from "sweetalert2"
 
 let ProductImages = ({ setPageAttr, methods: { callProductImageListGet, callProductImagePost, callProductImageDelete }, list }) => {
@@ -72,10 +74,26 @@ let ProductImages = ({ setPageAttr, methods: { callProductImageListGet, callProd
         callProductImagePost(data, () => finishedSubmit())
     } */
 
+    const upload = () => {
+        Helper.uploadImage(800, 800, (error, base64) => {
+            if (error) {
+                toast.error(error)
+                return
+            }
+
+            let data = {
+                file: base64
+            }
+            callProductImagePost(productId, data, () => {
+                callProductImageListGet(productId)
+            })
+        })
+    }
+
     return (
         <>
             <div className="clearfix text-left">
-                <button className="btn btn-primary" type="button"><i className="mr-1 fas fa-plus fa-white"></i>Adicionar Imagem</button>
+                <button className="btn btn-primary" type="button" onClick={() => upload()}><i className="mr-1 fas fa-plus fa-white"></i>Adicionar Imagem</button>
             </div>
             <div className="row mt-3">
                 {list.rows.map((a, ai) => {
@@ -87,7 +105,7 @@ let ProductImages = ({ setPageAttr, methods: { callProductImageListGet, callProd
                                 </div>
                                 <div className='d-flex mt-2'>
                                     <button className="btn btn-danger flex-fill" type="button"><i className="mr-1 fas fa-trash fa-white"></i>Deletar</button>
-                                    <div style={{width:'20px'}}></div>
+                                    <div style={{ width: '20px' }}></div>
                                     <button className="btn btn-success flex-fill" type="button"><i className="mr-1 fas fa-check text-white"></i>Principal</button>
                                 </div>
                             </div>
