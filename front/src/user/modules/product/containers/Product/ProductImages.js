@@ -5,13 +5,13 @@ import { bindActionCreators } from "redux"
 import { callProductImageListGet, callProductImagePost, callProductImageDelete } from "../../actions/productImages"
 import Helper from "../../../../../Helper"
 import { toast } from "react-toastify"
-// import Swal from "sweetalert2"
+import Swal from "sweetalert2"
 
 let ProductImages = ({ setPageAttr, methods: { callProductImageListGet, callProductImagePost, callProductImageDelete }, list }) => {
     const params = useParams()
     const [productId] = useState(!params.productId ? '' : params.productId)
 
-    /* const remove = (id) => {
+    const remove = (id) => {
         Swal.fire({
             title: 'Tem certeza que deseja deletar? Essa ação não poderá ser desfeita!',
             showDenyButton: true,
@@ -21,13 +21,11 @@ let ProductImages = ({ setPageAttr, methods: { callProductImageListGet, callProd
         }).then((result) => {
             if (result.isConfirmed) {
                 callProductImageDelete(id, () => {
-                    let pg = searchParams.get('page')
-                    pg = pg ? pg : 1
-                    callProductImageListGet(productId, {}, pg)
+                    callProductImageListGet(productId)
                 })
             }
         })
-    } */
+    }
 
     useEffect(() => {
         callProductImageListGet(productId)
@@ -101,17 +99,17 @@ let ProductImages = ({ setPageAttr, methods: { callProductImageListGet, callProd
                     return (
                         <div key={ai} className="col-md-3">
                             <div>
-                                <div style={{height:'238px'}} className='d-flex align-items-center'>
+                                <div style={{ height: '238px' }} className='d-flex align-items-center'>
                                     <img className='img-thumbnail' src={`${process.env.REACT_APP_API_HOST}/storage/products/${a.file}`} alt='foto do produto' style={{ maxHeight: '100%', width: '100%' }} />
                                 </div>
                                 <div className='d-flex mt-2'>
-                                    <button className="btn btn-danger flex-fill" type="button"><i className="mr-1 fas fa-trash fa-white"></i>Deletar</button>
-                                    {!a.active?(
+                                    <button className="btn btn-danger flex-fill" type="button" onClick={() => remove(a.id)}><i className="mr-1 fas fa-trash fa-white"></i>Deletar</button>
+                                    {!a.active ? (
                                         <>
                                             <div style={{ width: '20px' }}></div>
                                             <button className="btn btn-success flex-fill" type="button"><i className="mr-1 fas fa-check text-white"></i>Principal</button>
                                         </>
-                                    ):<></>}
+                                    ) : <></>}
                                 </div>
                             </div>
                         </div>
